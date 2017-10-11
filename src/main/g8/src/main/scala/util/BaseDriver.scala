@@ -18,7 +18,7 @@ trait BaseDriver extends Logging {
     lazy val spark = SparkSession.builder().appName(name).getOrCreate()
 
     val startTime = DateTime.now()
-    logger.info("Started at " + ${startTime.toString}")
+    logger.info("Started at " + startTime.toString)
 
     try{
       run(spark, config)
@@ -28,8 +28,7 @@ trait BaseDriver extends Logging {
 
     } finally {
       val endTime = DateTime.now()
-      logger.info(s"Finished at ${endTime.toString()}, took ${(endTime.getMillis.toDouble - startTime.getMillis.toDouble) / 1000} s")
-
+      logger.info("Finished at " + endTime.toString() + ", took " + ((endTime.getMillis.toDouble - startTime.getMillis.toDouble) / 1000))
       spark.stop()
     }
   }
@@ -40,10 +39,10 @@ trait BaseDriver extends Logging {
     val config: Config = pathArg.map { path =>
       val file = new File(path)
       if(!file.exists()){
-        throw new Exception(s"Config path ${file.getAbsolutePath} doesn't exist!")
+        throw new Exception("Config path " + file.getAbsolutePath + " doesn't exist!")
       }
 
-      logger.info(s"Loading properties from ${file.getAbsolutePath}")
+      logger.info(s"Loading properties from " + file.getAbsolutePath)
       ConfigFactory.load(ConfigFactory.parseFile(file).resolve())
     }.getOrElse {
       ConfigFactory.load()
