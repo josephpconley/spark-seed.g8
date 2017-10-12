@@ -25,11 +25,11 @@ lazy val commonSettings = Seq(
 
 commonSettings
 
-//IDEA settings
 outputStrategy := Some(StdoutOutput)
 
 run in Compile <<= Defaults.runTask(fullClasspath in Compile, mainClass in (Compile, run), runner in (Compile, run))
 
+//update your Intellij configuration to use `mainRunner` when running from Intellij (not the default)
 lazy val mainRunner = project.in(file("mainRunner")).dependsOn(RootProject(file("."))).settings(
   commonSettings,
   libraryDependencies ++= sparkDependencies.map(_ % "compile"),

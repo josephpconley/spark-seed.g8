@@ -15,7 +15,11 @@ trait BaseDriver extends Logging {
 
   def main(args: Array[String]): Unit = {
     val (sparkConf, config) = loadConfig(args.headOption)
-    lazy val spark = SparkSession.builder().appName(name).getOrCreate()
+    lazy val spark = SparkSession.builder()
+      .appName(name)
+      .master(config.master)
+      .config(sparkConf)
+      .getOrCreate()
 
     val startTime = DateTime.now()
     logger.info("Started at " + startTime.toString)
