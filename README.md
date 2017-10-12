@@ -1,4 +1,4 @@
-#spark-seed
+# spark-seed
 
 Typical Spark 2.x project setup with some additional utilities and support for Typesafe Config
 

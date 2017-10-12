@@ -22,7 +22,6 @@ lazy val commonSettings = Seq(
   resolvers += Resolver.typesafeRepo("releases")
 )
 
-
 commonSettings
 
 outputStrategy := Some(StdoutOutput)
